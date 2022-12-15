@@ -1,24 +1,45 @@
-class BaseballGame {
-  #solutionArr;
-  #inputArr;
+const InputView = require("./InputView");
+const OutputView = require("./OutputView");
+const { Console } = require("@woowacourse/mission-utils");
 
-  constructor(solutionArr, inputArr) {
-    this.#solutionArr = solutionArr;
+class BaseballGame {
+  #inputArr;
+  #solutionArr;
+  #resultValueArr;
+
+  constructor(inputArr, solutionArr) {
     this.#inputArr = inputArr;
+    this.#solutionArr = solutionArr;
   }
 
   compareNums() {
-    let strike = 0;
     let ball = 0;
+    let strike = 0;
 
-    for (i = 0; i < 3; i++) {
-      if (this.#solutionArr.includes(this.#inputArr[i])) {
-        if (this.#solutionArr[i] === this.#inputArr[i]) return (strike += 1);
-        return (ball += 1);
+    for (let idx = 0; idx < 3; idx++) {
+      if (this.isNothing(idx)) {
+        continue;
       }
+      this.isBall(idx) ? ball++ : strike++;
     }
-    console.log(strike);
-    console.log(ball);
+    this.#resultValueArr = [ball, strike];
+    return this.#resultValueArr;
+  }
+
+  isNothing(idx) {
+    if (this.#solutionArr.includes(this.#inputArr[idx])) return false;
+    return true;
+  }
+
+  isBall(idx) {
+    // 답안 배열에 존재하고 일치하면
+    if (this.#solutionArr[idx] === this.#inputArr[idx]) return false;
+    return true;
+  }
+
+  isRightAnswer() {
+    if (this.#resultValueArr[1] !== 3) return false;
+    return true;
   }
 }
 
