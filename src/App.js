@@ -1,5 +1,6 @@
-const OutputView = require("../../../precourse/javascript-bridge/src/OutputView");
+const OutputView = require("./OutputView");
 const BaseballRandomNumGenerate = require("./BaseballRandomNumGenerate");
+const InputView = require("./InputView");
 
 class App {
   play() {
@@ -9,6 +10,7 @@ class App {
   runBaseballGame() {
     OutputView.printStartMent();
     BaseballRandomNumGenerate.generate();
+    InputView.readThreeNums();
   }
 }
 
