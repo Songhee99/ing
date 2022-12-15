@@ -1,6 +1,7 @@
 const OutputView = require("./OutputView");
 const BaseballRandomNumGenerate = require("./BaseballRandomNumGenerate");
 const InputView = require("./InputView");
+const BaseballGame = require("./BaseballGame");
 
 class App {
   play() {
@@ -9,8 +10,19 @@ class App {
 
   runBaseballGame() {
     OutputView.printStartMent();
-    BaseballRandomNumGenerate.generate();
-    InputView.readThreeNums();
+    this.inputThreeNums();
+  }
+
+  inputThreeNums() {
+    InputView.readThreeNums((threeNums) => {
+      const solutionArr = BaseballRandomNumGenerate.generate();
+      this.baseballGame = new BaseballGame(threeNums, solutionArr);
+      this.getComparisonResult();
+    });
+  }
+
+  getComparisonResult() {
+    this.baseballGame.compareNums();
   }
 }
 

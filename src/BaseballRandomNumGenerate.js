@@ -6,6 +6,7 @@ const BaseballRandomNumGenerate = {
     for (randomNumArr.length = 0; randomNumArr.length < 3; ) {
       this.checkDuplication(randomNumArr);
     }
+    return randomNumArr;
   },
 
   checkDuplication(randomNumArr) {
